@@ -123,6 +123,11 @@ h3 {
   /* Crisp original pixels */
 }
 
+#jsspeccy canvas {
+  max-width: none !important;
+  width: auto !important;
+}
+
 .spectrum-image {
   width: 100%;
   margin: 0 auto;

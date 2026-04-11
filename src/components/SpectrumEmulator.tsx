@@ -178,8 +178,11 @@ export default function SpectrumEmulator() {
     return () => window.removeEventListener('resize', handleDeviceFlip);
   }, []);
 
+  const currentWidthObj = typeof cropConfig.width === 'number' ? cropConfig.width : parseInt(String(cropConfig.width).replace('px', '')) || 768;
+  const scaledWidth = currentWidthObj * scaleConfig.scale;
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', height: scaleConfig.scale !== 1 ? `${scaleConfig.baseHeight * scaleConfig.scale}px` : 'auto' }}>
+    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', width: scaleConfig.scale !== 1 ? `${scaledWidth}px` : '100%', height: scaleConfig.scale !== 1 ? `${scaleConfig.baseHeight * scaleConfig.scale}px` : 'auto' }}>
       <div 
         className="player-wrapper glass-panel"
         style={{
