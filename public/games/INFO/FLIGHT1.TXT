@@ -1,0 +1,376 @@
+THE SPECTRUM GAMES DATABASE
+
+FLIGHT SIMULATION
+
+PUBLISHER
+Psion Sinclair
+
+AUTHORS
+?
+
+YEAR
+1982
+
+DESCRIPTION
+Flight Simulation game.
+
+CONTROLS
+Cursor Joystick and/or Keys
+
+Cursor up (7), Joystick forward, dive.
+Cursor down (6), Joystick backward, climb.
+Cursor right (8), Joystick to right, bank to right.
+Cursor left (5), Joystick to left, bank to left.
+Z, Rudder control left        X, Rudder control right
+P, Increase Throttle          O, Decrease Throttle
+F, Increase flap extent       D, Decrease Flap extent
+G, Lower gear if up. Raise gear (undercarriage) if down.
+B, Change beacon sequentially
+M, Switch from cockpit display to navigational Map or
+     back to cockpit.
+
+
+ORIGINAL INLAY CARD TEXT
+Popular Computing Weekly said of Psion's Flight Simulation
+on the ZX81 "No words can do justice to this most elegant of
+programs ... You will not see a better computer game till
+Psion produce one for the Spectrum". Here it is. Learn to
+fly, bank, dive and climb, see the world outside through the
+cockpit windows, land and take-off with the aid of the many
+cockpit instruments.
+
+Sinclair ZX Spectrum with 48k RAM
+FLIGHT SIMULATION from PSION
+
+Load and run by typing LOAD "flight"
+
+Over the last decade, with the increasing power of computers,
+pilots have been trained to "fly" new airliners on large
+scale, computer-controlled simulators on the fround. Even on
+a samll microcomputer like the Sinclair ZX Spectrum the
+essential parameters of flight, the dynamics of the airplane,
+the navigation of the airpline, the main instruments and the
+representaion of the outside world can be portrayed in real-
+time. "FLIGHT Simulation" includes these effects and
+represents a small, high-performance, two-engined, propeller-
+driven airplane.
+
+ASPECTS OF FLYING
+The essential controls of an airplane include the joystick,
+flaps, rudder and engine power. Moving the joystick sideways
+affects the ailerons on the wings causing the plane to bank
+to the left or right. Moving the joystick forwards and
+backwards affects the elevators on the tailplane so that the
+nose of the airplane moves down or up respectively. The
+aerodynamics of an airplane are extremely complicated.
+Changing one control usually has more than one effect. For
+example the ailerons do not simply cause the plane to roll,
+but produce a sideways airflow which causes the plane to
+turn as well. You may learn and experience these effects in
+the simulation.
+The attitude and motion of an airplane is shown by many
+instruments and navigational aids in the pilot's cockpit, as
+discussed below. The pilot needs to use these instruments to
+navigate his airplane on to the right line or vector for
+approach to the runway, to fly his airplane on the right
+heading or bearing along that vector and to approach the
+runway with the right speed, altitude and descent angle to
+land the airplane. Typically, the correct approach angle of
+descent should be about 3deg which implies an attitude of
+about 6,000 feet at 20 miles out, 3,000 feet at 10 miles out
+and 1,000 feet at just over 3 miles from the runway. The
+rudder controls can contribute to the turning of the
+airplane. When on the ground, while taxi-ing the rudder
+controls also steer the direction of the airplane.
+
+FLYING ON THE ZX SPECTRUM
+Flight Simulation on the Spectrum is a full-feature program
+which mimics the piloting of a small airplane in real-time
+and in considerable detail. The detailed dynamics of an
+airplane are included and even looping the loop and rolling
+may be performed. You may land at either of two runways,
+take-off, navigate with the aid of beacons and in flight view
+the features of the world outside through the cockpit
+windows. The main display is the pilot's cockpit view with a
+detailed instrument panel in the lower half of the screen
+and a view of the world outside through the cockpit windows
+in the top half of the screen. Through the cockpit windows
+you can see the horizon formed by the light sky and dark
+ground, the runway lights in three-dimensional perspective if
+you are in the vicinity of the runway, and features on the
+ground such as lakes, etc. As you bank, dive and climb, so
+the horizon and features on the ground will move accordingly
+through the cockpit windows.
+You may switch the dive however, to a navigational chart or
+map showing the beacons, runways and other features to help
+you navigate and land the plane.
+After the program has been loaded from cassette, a menu will
+appear asking you whether you wish to take-off, start in
+flight or practice the final approach for landing. Press the
+keys 1, 2 or 3 respectively. You will be asked whether you
+want to include the effects of wind. Answer yes if you are
+skilled and can cope with the effects of wind both in landing
+and navigation.
+Otherwise press "n" for no. The program will then change
+immediately to the pilot's cockpit window.
+
+THE INSTRUMENT PANEL
+In the lower half of the screen in the pilot's cockpit view
+in the instrument panel. There are five clock-like dials, a
+number of gauges, warning lights and a variety of digital
+read-outs. The five "clocks" from left to right are the
+instrument landing system (ILS), the airspeed indicator,
+the radio-direction-finding equipment (RDF), the altimeter
+and the rate-of-climb indicator (ROC).
+RDF CLOCK is the large dial in the centre of the instrument
+panel. A small airplane is drawn in the centre of the dial
+and points in the direction or heading of the plane. A
+digital reading on the clock gives the heading in compass
+degrees of the airplane. The RDF is the most important
+navigational instrument. At any stage the plane is logged on
+to one of a number of beacons on the ground. The position of
+the current beacon at any stage relative to the direction of
+the airplane is represented on the RDF clock as a flashing
+dot near the circumference. If you wish to head directly for
+a beacon, bank the airplane until the flashing dot moves
+round the circumference to the "12 o'clock" position.
+AIRSPEED INDICATOR is a clock with one needle immediately to
+the left of the RDF. The needle points to the airspeed of
+the airplane measured in knots x 10.
+ALTIMETER is a clock with two needles immediately to the
+right of the RDF. The small needle gives the height in units
+of 1000 feet and the longer needle gives the next digit as
+hundreds of feet.
+ROC or rate-of-climb indicator is the clock-like dial on the
+right-hand side. It measures the vertical speed of the
+airplane in units of 1000 feet per minute. When the needle
+points upwards above the 0, the plane is climbing and vice
+versa.
+POWER guage on the bottom right measures the extent of the
+throttle. The thrust of the engines increases with throttle
+but reduces in the rarer atmosphere of higher altitudes.
+FUEL guage displays the fuel remaining in the tanks
+FLAPS shows the angle of extent of the flaps. The needle
+points downwards with maximum flap and is horizontal with
+flaps retracted.
+GEAR has a green and red panel. When the undercarriage or
+gear is up this will be indicated in the red panel,
+otherwise "down" will appear in the green panel.
+BCN RGE BRG is a digital readout giving information on the
+current logged-on beacon. BCN gives the beacon call sign of
+the logged-on beacon.
+RGE gives its range in nautical miles and BRG gives the
+bearing of the beacon in compass degrees relative to the
+airplane.
+ILS is the Instrument Landing System dial on the left of the
+panel. It is a guidance system which aids the pilot in the
+approach to the runway. A radio beacon at the start of the
+runway emits a signal, the position of which is displayed on
+the ILS as a flashing dot. When the airplane is on the
+correct approach to the runway, the flashing dot will be at
+the centre of the ILS. If it is not at the cente, you the
+pilot should steer towards the dot. Thus if the dot,
+representing the runway is on the left, the pilot should bank
+to the left until the dot moves to the centre. If it is
+above the centre, the plane is too low and the joystick
+should be pulled back. Ra or Radio altimeter is a digital
+readout and part of the ILS system. A reflected radio signal
+=66rom the ground measures the height in feet of the airplane
+=66rom the ground to the wheels. It gives a precise measurement
+for landing.
+
+THE PILOT CONTROLS
+JOYSTICK - The joystick of the airplane is represented on
+the keyboard of the ZX Spectrum by the cursor arrows (keys 5,
+6, 7 and 8). Press <Cursor left> (key 5) to bank left. Press
+<Cursor right> (key 8) to bank right. Press <Cursor up>
+(key 7) to move the joystick forward and point the nose of
+the plane down for diving. Press <Cursor down> (key 6) to
+pull the joystick towards you so that the nose of the plane
+goes up for ascent.
+RUDDER - The rudder on the tailplane can help to turn the
+plane and is controlled by the keys "Z" to turn left and "X"
+to turn right. Whilst taxi-ing on the ground, the gear is
+steered by the rudder controls.
+POWER - The engines' thrust or power is controlled by the
+keys "P" and "O". By pressing the key "P" the throttle is
+increased and the engines give more power while pressing key
+"O" reduces the throttle and engine power (note "O" is to
+the left of "P")
+FLAPS - The extent of the flaps on the wings is controlled
+by the keys "F" and "D". Press the key "F" to extend the
+flaps furthure and press the key "D" to retract, or
+partially retract, the flaps (note key "D" is to the left of
+key "F"). The flaps can be extended or retracted to a varying
+degree (as shown on the guage) and should only be fully
+extended for the final stage of landing to avoid stalling at
+reduced speed. With the flaps retracted, the stall speed of
+the plane is 80 knots, while with full flaps, the stall speed
+is 60 knots.
+Extending the flaps whils the plane is at high speed could
+possibly damage or tear off the wings of the plane.
+GEAR - the gear or undercarriage can be extended by pressing
+the key "G". If the gear is down pressing the key "G" will
+retract the undercarriage. The undercarriage should not be
+dropped at high speed as apart from increasing the drag on
+the plane you may damage or destroy the undercarriage.
+BEACON - To change the current logged-on beacon, press the
+key "B". So long as you press the key "B" the current beacon
+will change sequentially until you obtain the navigational
+beacon you require.
+MAP - Press the key "M" to switch the display from the
+cockpit pilot's display to the map or to switch back from the
+map to the cockpit pilot's display.
+You may press several keys simultaneously.
+NEVER PRESS THE BREAK KEY.
+
+THE MAP
+
+If you press the key "M", the display will change to a
+navigational chart or map showing the runways, features on
+the ground such as lakes and the position of the navigational
+beacons. The map shows the four compass points of NORTH
+(N-0deg), EAST (E-90deg), SOUTH (S-180deg), WEST (W-270deg).
+There are two airports, a large international airport called
+MAIN and a small local airport called CLUB. MAIN has a
+long runway of over a mile in length and is therefore easy
+to land on in a small plane. CLUB however is a small local
+airport and therefore has a short runway of some 800 yards.
+The runway of MIAN lies along the line east to west
+(90deg-180deg). Therefore on your final approach for landing the
+plane must be travelling on a heading of exactly 90deg or 270deg.
+The runway of CLUB on the other hand, lies along the line
+north to south.
+The maps also shows the position of the various navigational
+beacons and a variety of landmarks and features on the
+ground. Near the airport MAIN, there are two beacons some
+three miles beyond each end of the runway with call signs of
+ME and MW. Airport CLUB has two beacons CN and CS two miles
+beyond each end of the runway. There are three other
+navigational beacons 0A 0B and 0C.
+
+NAVIGATION
+
+The most difficult part of flying is the approach and landing
+at the airfield. You can experiment with the controls in
+varying the speed, altitude and direction of the plane at a
+reasonably high altitude without worrying about the
+navigation, If you wish to land the plane, however, you will
+have to navigate the plane on to the right vector and on to
+the right course, and you will have to approach the runway at
+roughly the right glide angle. This is a difficult task and
+requires a lot of practice and experience before you can
+achieve landing successfully.
+The map and instruments will help you to determine your
+position precisely. You will then need to think of the
+approximate manoeuvres and course to approach the airfield on
+the right flight path. The runway of airport MAIN lies east
+to west in the simulation on a line (or vector) from 90deg to
+270deg or vice-versa. You may approach the runway from either
+end. For example, if you wish to approach the runway from
+the east to the west, you must first manoeuvre the airplane
+far to the east of the runway. If you use the beacon ME you
+will need to fly the plane until the beacon is on a bearing
+(or vector) of 270deg. If you then bank on to this bearing on
+a course or heading of 270deg you will be flying on exactly
+the right flight path for your approach to the runway. As you
+fly towards the beacon ME, to keep on the right flight path
+you must ensure that both the heading and the beacon coincide
+at 270deg. As you fly over the beacon in the later stages of
+the approach, the bearing of the beacon will of course change
+to 90deg. Similarly, you may use any of the other beacons to
+set a course for a particular flight objective. When heading
+directly for a beacon, remember that your heading and the
+beacon bearing must always coincide precisely. Flying is
+difficult for the uninitiated and if you have trouble
+navigating yourself to the runway for final landing you can
+always use the option at the beginning of the program to
+give you an automatic approach and allow you to experiment
+with the final touchdown.
+Once you have touched down, you must reduce the power to zero
+to bring the plane to a halt. You may taxi and steer using
+the rudder controls and take off again.
+
+
+Key             Pilot Control
+[Cursor Up]     Joystick forward (dive)
+[Cursor Down]   Joystick backward (climb)
+[Cursor Right]  Joystick to right (bank to right)
+[Cursor Left]   Joystick to left (bank to left)
+Z               Rudder control (left)
+X               Rudder control (right)
+P               Increase throttle (more power)
+O               Decrease throttle (less power)
+F               Increase flap extent
+D               Decrease flap extent
+G               Lower gear (undercarriage) if up
+                Raise gear (undercarriage) if down
+B               Change beacon sequentially
+M               Switch from cockpit display to navigational
+                          Map or back to cockpit
+
+Copyright 1982 Psion Ltd.
+Made in UK
+
+
+
+HINTS/CHEATS
+
+RELATED GAMES
+Take your pick of flight simulations...
+
+SCORES
+Sinclair User, 6/10
+Softwords (magazine of The Microcomputer Software Club) 8/10
+(this correlates to 3/5 in 'The Good Software Guide' book)
+
+Johnathan Davies in the 'Complete YS Guide to Flight Sims' in
+YS Issue 58 (Oct 90)
+
+"THE FIRST FLIGHT SIM EVER - Ha. This one's easy. It was
+Flight Simulation, one of the first games that ever came out
+on the Speccy. It was also the first game I bought. (Aargh!
+The secret's out.) It was one of those Psion games which came
+out on Sinclair's own label, and despite the mind-numbingly
+tedious piccy on the box (the instrument panel of a plane) it
+hung around near the top of the charts for years. In actual
+fact, Flight Simulation is a conversion of a ZX81 game of the
+same name. Yikes. We'll take a closer look at this one later
+on." ...
+
+"FLIGHT SIMULATION Psion
+ As we found earlier, this was the first Speccy flight sim
+ever, and it shows. It comes on a cassette with the game on
+one side and 'Blank Tape' conveniently written on the other.
+See which one you prefer. It actually looks quite promising
+(the inlay card is massive, with loads of miniscule
+instructions) and, despite the fact that it's largely written
+in Basic, the game moves along at a fair old rate. The
+problem is the scenery. All there is to look at on the ground
+(which is blue) is the runway, Lake Orb (which is round),
+Lake Tri (which is triangular) and some hills (which you
+can't actually see at all, but you'll know if you crash into
+them).
+ The plane responds very sluggishly, but luckily you don't
+have to use them very much because a 'flight' generally
+consists of taking off, pointing the plane towards the other
+airport, coming back three and a half hours later and
+landing. If you crash there's a lengthy disaster effect and
+then you're asked if you want another flight. Press N and the
+program stops. Hmm. A legend in its own time, but a bit crap
+in this one.
+The View [graphics]: 25%, Realism: 31%, Dakka
+Factor [guns]: 0%, Net Weight [amount of junk packaging]: 45%
+Overall: 35%"
+
+URL
+ftp://ftp.nvg.unit.no/pub/sinclair/snaps/games/unsorted/
+f/flightsi.zip
+
+FACTS
+Other than being the first Speccy flight simulation ever,
+it's also one of those games with the mythical quality of
+being amongst the first batch of games released for the
+Spectrum.
+
+NOTES

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div id="target" style="width:100px;height:100px;background:red;" tabindex="0">Click me, then press 1</div>
+  <button id="btn">Send Synthetic 1</button>
+  <script>
+    const target = document.getElementById('target');
+    target.addEventListener('keydown', e => {
+      console.log('Target received keydown:', {key: e.key, code: e.code, keyCode: e.keyCode, which: e.which, isTrusted: e.isTrusted});
+    });
+    document.getElementById('btn').addEventListener('click', () => {
+      target.dispatchEvent(new KeyboardEvent('keydown', {
+        key: '1', code: 'Digit1', keyCode: 49, which: 49, bubbles: true, cancelable: true
+      }));
+    });
+  </script>
+</body>
+</html>

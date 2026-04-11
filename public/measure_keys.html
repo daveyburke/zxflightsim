@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 0; display: flex; flex-direction: column; align-items: center; }
+    #container { position: relative; width: 1200px; height: 516px; background: url('/assets/zx-keyboard.jpg'); background-size: 100% 100%; cursor: crosshair; }
+    #log { padding: 20px; font-family: monospace; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <div id="log">Click the top-left key ('1'), then the bottom-right key ('Space')</div>
+  <script>
+    const el = document.getElementById('container');
+    const log = document.getElementById('log');
+    let points = [];
+    el.addEventListener('click', e => {
+      const rect = el.getBoundingClientRect();
+      const pctX = (e.clientX - rect.left) / rect.width;
+      const pctY = (e.clientY - rect.top) / rect.height;
+      points.push({x: pctX, y: pctY});
+      log.innerHTML += `<br>Point ${points.length}: ${pctX.toFixed(3)}, ${pctY.toFixed(3)}`;
+      if (points.length === 2) {
+         log.innerHTML += `<br>Box X: ${points[0].x.toFixed(3)} to ${points[1].x.toFixed(3)} | Y: ${points[0].y.toFixed(3)} to ${points[1].y.toFixed(3)}`;
+      }
+    });
+  </script>
+</body>
+</html>

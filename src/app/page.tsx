@@ -1,66 +1,52 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from 'next/image';
+import SpectrumEmulator from '@/components/SpectrumEmulator';
+import MotionController from '@/components/MotionController';
+import EngineSound from '@/components/EngineSound';
+import InteractiveKeyboard from '@/components/InteractiveKeyboard';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main>
+      <div className="layout-grid" style={{ paddingTop: '1rem' }}>
+        <section className="emulator-container">
+          <SpectrumEmulator />
+
+          <div style={{ marginTop: '0.5rem' }}>
+            <InteractiveKeyboard />
+          </div>
+        </section>
+
+        <aside className="controls-panel glass-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <h2 style={{ marginBottom: '0.5rem', fontSize: '1.2rem', color: 'var(--zx-white)', textShadow: 'none' }}>
+            Psion Flight Simulation<br /> ZX Spectrum 48K (1982)
+          </h2>
+          <h3>PILOT CONTROLS</h3>
+          <ul className="controls-list">
+            <li><span className="key-badge">Cursor Up</span> <span className="action-desc">Dive</span></li>
+            <li><span className="key-badge">Cursor Down</span> <span className="action-desc">Climb</span></li>
+            <li><span className="key-badge">Cursor Right</span> <span className="action-desc">Bank to right</span></li>
+            <li><span className="key-badge">Cursor Left</span> <span className="action-desc">Bank to left</span></li>
+            <li><span className="key-badge">Z</span> <span className="action-desc">Rudder control (left)</span></li>
+            <li><span className="key-badge">X</span> <span className="action-desc">Rudder control (right)</span></li>
+            <li><span className="key-badge">P</span> <span className="action-desc">Increase throttle</span></li>
+            <li><span className="key-badge">O</span> <span className="action-desc">Decrease throttle</span></li>
+            <li><span className="key-badge">F</span> <span className="action-desc">Increase flap extent</span></li>
+            <li><span className="key-badge">D</span> <span className="action-desc">Decrease flap extent</span></li>
+            <li><span className="key-badge">G</span> <span className="action-desc">Toggle gear</span></li>
+            <li><span className="key-badge">B</span> <span className="action-desc">Change beacon</span></li>
+            <li><span className="key-badge">M</span> <span className="action-desc">Switch Map / Cockpit</span></li>
+            <li><span className="key-badge">Esc / 0</span> <span className="action-desc">Restart</span></li>
+          </ul>
+
+          <div style={{ marginTop: 'auto' }}>
+            <MotionController />
+          </div>
+          <div style={{ marginTop: '0.25rem', textAlign: 'center', fontSize: '0.8rem', color: 'var(--zx-cyan)' }}>
+            Powered by JSSpeccy. Vibe coded by Dave Burke (2026)
+          </div>
+        </aside>
+      </div>
+      <EngineSound />
+    </main>
   );
 }

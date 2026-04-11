@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 0; display: flex; flex-direction: column; align-items: center; }
+    #container { position: relative; width: 1200px; height: 516px; background: url('/assets/zx-keyboard.jpg'); background-size: 100% 100%; cursor: crosshair; }
+    #log { padding: 20px; font-family: monospace; font-size: 16px; white-space: pre; }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <div id="log">Click the centers of the keys in this exact order:
+1. '1'
+2. '0'
+3. 'Q'
+4. 'P'
+5. 'A'
+6. 'ENTER'
+7. 'CAPS SHIFT'
+8. 'SPACE'
+  </div>
+  <script>
+    const el = document.getElementById('container');
+    const log = document.getElementById('log');
+    let points = [];
+    const names = ['1', '0', 'Q', 'P', 'A', 'ENTER', 'CAPS SHIFT', 'SPACE'];
+    el.addEventListener('click', e => {
+      const rect = el.getBoundingClientRect();
+      const pctX = (e.clientX - rect.left) / rect.width;
+      const pctY = (e.clientY - rect.top) / rect.height;
+      if (points.length < names.length) {
+        points.push({x: pctX, y: pctY});
+        log.innerHTML += `\n${names[points.length-1]} center: ${pctX.toFixed(4)}, ${pctY.toFixed(4)}`;
+      }
+      
+      if (points.length === 8) {
+         log.innerHTML += '\n\nDone! Here are the row boundaries:';
+         for (let r=0; r<4; r++) {
+             const p1 = points[r*2];
+             const p2 = points[r*2 + 1];
+             const yMid = (p1.y + p2.y) / 2;
+             const startX = p1.x;
+             const endX = p2.x;
+             log.innerHTML += `\nRow ${r}: Y_center=${yMid.toFixed(4)} | X_start=${startX.toFixed(4)} | X_end=${endX.toFixed(4)}`;
+         }
+      }
+    });
+  </script>
+</body>
+</html>

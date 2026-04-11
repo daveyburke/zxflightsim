@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 0; padding:0; background: #333; }
+    #container { position: relative; width: 1200px; height: 516px; background: url('/assets/zx-keyboard.jpg'); background-size: 100% 100%; top:0; left:0;}
+    .dot { position: absolute; width: 6px; height: 6px; background: cyan; border-radius: 50%; transform: translate(-50%, -50%); border: 2px solid white; z-index: 100; }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    const el = document.getElementById('container');
+    const ROW_ZONES = [
+      { yMax: 0.285, startX: 0.0570, colWidth: 0.0880, y: 0.1744 },
+      { yMax: 0.513, startX: 0.0980, colWidth: 0.0880, y: 0.3973 },
+      { yMax: 0.741, startX: 0.1233, colWidth: 0.0880, y: 0.6298 },
+      { yMax: 1.000, startX: 0.0600, colWidth: 0.0880, y: 0.8527 }
+    ];
+    for (let r=0; r<4; r++) {
+      for (let c=0; c<10; c++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        const cx = ROW_ZONES[r].startX + c * ROW_ZONES[r].colWidth;
+        const cy = ROW_ZONES[r].y;
+        dot.style.left = (cx * 100) + '%';
+        dot.style.top = (cy * 100) + '%';
+        el.appendChild(dot);
+      }
+    }
+  </script>
+</body>
+</html>
