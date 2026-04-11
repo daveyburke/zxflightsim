@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from 'react';
 export default function MotionController() {
   const [enabled, setEnabled] = useState(false);
   const [needPermission, setNeedPermission] = useState(false);
-  const [activeSensors, setActiveSensors] = useState<string>('None');
 
   const keyStates = useRef({
     up: false,
@@ -25,7 +24,7 @@ export default function MotionController() {
       cancelable: true,
       composed: true
     });
-    
+
     Object.defineProperties(event, {
       keyCode: { value: keyCode },
       which: { value: keyCode },
@@ -41,7 +40,7 @@ export default function MotionController() {
         return;
       }
     }
-    
+
     // Fallback if shadow root isn't heavily initialized yet
     document.dispatchEvent(event);
   };
@@ -49,7 +48,7 @@ export default function MotionController() {
   const updateKey = (key: string, shouldBeDown: boolean) => {
     const kState = keyStates.current as any;
     const internalKey = key === 'ArrowUp' ? 'up' : key === 'ArrowDown' ? 'down' : key === 'ArrowLeft' ? 'left' : 'right';
-    
+
     if (shouldBeDown && !kState[internalKey]) {
       kState[internalKey] = true;
       dispatchKey(key, 'keydown');
@@ -64,7 +63,7 @@ export default function MotionController() {
     // Vertical hold roll (x-axis tracks lateral tilt)
     updateKey('ArrowLeft', x > 3);
     updateKey('ArrowRight', x < -3);
-    
+
     // Vertical hold pitch maps to Z axis!
     // Tilt forward -> face up gravity -> z is positive. Lower threshold to 1.5 for higher sensitivity
     updateKey('ArrowUp', z > 1.5);    // Dive
@@ -97,7 +96,6 @@ export default function MotionController() {
       updateKey('ArrowDown', false);
       updateKey('ArrowLeft', false);
       updateKey('ArrowRight', false);
-      setActiveSensors('None');
       return;
     }
 
@@ -112,11 +110,9 @@ export default function MotionController() {
           hasAccelerometerData = true;
           if (sensor) {
             handleAccelerometer(sensor.x, sensor.y, sensor.z);
-            setActiveSensors('Accelerometer (Generic API)');
           }
         });
         sensor.start();
-        setActiveSensors('Initializing Sensor...');
       } catch (err) {
         console.warn('Generic Sensor API failed', err);
         sensor = null;
@@ -131,7 +127,6 @@ export default function MotionController() {
         // If accelerometer is actively firing, ignore legacy device orientation to prevent double-firing
         if (!hasAccelerometerData && e.beta !== null && e.gamma !== null) {
           handleOrientation(e.beta, e.gamma);
-          setActiveSensors('DeviceOrientationEvent (Fallback)');
         }
       };
       window.addEventListener('deviceorientation', orientHandler);
@@ -170,13 +165,10 @@ export default function MotionController() {
       <div style={{ flex: 1 }}>
         <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--zx-green)' }}>Motion Controls</h3>
         <p style={{ fontSize: '0.8rem', color: 'var(--zx-white)', margin: '0.5rem 0' }}>
-          Steer the aircraft using device accelerometer/gyroscope.
+          Control aircraft with phone sensors
         </p>
-        <span className={`status-badge ${enabled ? 'active' : 'inactive'}`}>
-          {enabled ? `ACTIVE (${activeSensors})` : 'INACTIVE'}
-        </span>
       </div>
-      
+
       {needPermission ? (
         <button className="btn-permission" onClick={requestPermission}>
           Grant Sensor Permission

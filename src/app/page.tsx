@@ -17,21 +17,21 @@ export default function Home() {
         </section>
 
         <aside className="controls-panel glass-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-          <h2 style={{ marginBottom: '0.5rem', fontSize: '1.2rem', color: 'var(--zx-white)', textShadow: 'none' }}>
+          <h2 style={{ marginBottom: '0.5rem', fontSize: '1.6rem', color: 'var(--zx-white)', textShadow: 'none' }}>
             Psion Flight Simulation<br /> ZX Spectrum 48K (1982)
           </h2>
           <h3>PILOT CONTROLS</h3>
           <ul className="controls-list">
-            <li><span className="key-badge">Cursor Up</span> <span className="action-desc">Dive</span></li>
-            <li><span className="key-badge">Cursor Down</span> <span className="action-desc">Climb</span></li>
-            <li><span className="key-badge">Cursor Right</span> <span className="action-desc">Bank to right</span></li>
-            <li><span className="key-badge">Cursor Left</span> <span className="action-desc">Bank to left</span></li>
-            <li><span className="key-badge">Z</span> <span className="action-desc">Rudder control (left)</span></li>
-            <li><span className="key-badge">X</span> <span className="action-desc">Rudder control (right)</span></li>
+            <li><span className="key-badge">Cursor Up</span> <span className="action-desc">Pitch down</span></li>
+            <li><span className="key-badge">Cursor Down</span> <span className="action-desc">Pitch up</span></li>
+            <li><span className="key-badge">Cursor Right</span> <span className="action-desc">Bank right</span></li>
+            <li><span className="key-badge">Cursor Left</span> <span className="action-desc">Bank left</span></li>
+            <li><span className="key-badge">Z</span> <span className="action-desc">Rudder left</span></li>
+            <li><span className="key-badge">X</span> <span className="action-desc">Rudder right</span></li>
             <li><span className="key-badge">P</span> <span className="action-desc">Increase throttle</span></li>
             <li><span className="key-badge">O</span> <span className="action-desc">Decrease throttle</span></li>
-            <li><span className="key-badge">F</span> <span className="action-desc">Increase flap extent</span></li>
-            <li><span className="key-badge">D</span> <span className="action-desc">Decrease flap extent</span></li>
+            <li><span className="key-badge">F</span> <span className="action-desc">Increase flap</span></li>
+            <li><span className="key-badge">D</span> <span className="action-desc">Decrease flap</span></li>
             <li><span className="key-badge">G</span> <span className="action-desc">Toggle gear</span></li>
             <li><span className="key-badge">B</span> <span className="action-desc">Change beacon</span></li>
             <li><span className="key-badge">M</span> <span className="action-desc">Switch Map / Cockpit</span></li>
