@@ -45,6 +45,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 h1,
@@ -71,7 +72,7 @@ h3 {
   gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0.5rem; /* Tighter padding for phones */
 }
 
 @media (min-width: 1024px) {
@@ -81,6 +82,7 @@ h3 {
     gap: 2rem;
     align-items: start;
     justify-content: center;
+    padding: 1rem; /* Desktop safe layout padding */
   }
 }
 

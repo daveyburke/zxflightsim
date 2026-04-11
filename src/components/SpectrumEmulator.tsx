@@ -24,8 +24,8 @@ export default function SpectrumEmulator() {
       if (isMobile) {
         // Calculate the maximum clean native scale factor to fill 100vw!
         // We divide raw innerWidth by 256 (the canvas width) to allow the visual 
-        // box to securely span bounds without bursting the 1rem (16px x2 = 32px) layout-grid padding CSS.
-        const padding = 32;
+        // box to securely span bounds without bursting the 0.5rem (8px x2 = 16px) layout-grid padding CSS.
+        const padding = 16;
         // Native High-DPI engine base width is strictly 768px now
         const scale = (window.innerWidth - padding) / 768;
         setScaleConfig({ scale, baseHeight: 576 });
@@ -78,7 +78,7 @@ export default function SpectrumEmulator() {
 
             // Re-sync correct scaled grid bounds using the exact height remaining!
             if (isMobile) {
-              setScaleConfig({ scale: (window.innerWidth - 32) / 768, baseHeight: finalHeight });
+              setScaleConfig({ scale: (window.innerWidth - 16) / 768, baseHeight: finalHeight });
             } else {
               setScaleConfig({ scale: 1.0, baseHeight: finalHeight });
             }
@@ -170,7 +170,7 @@ export default function SpectrumEmulator() {
       // Re-map constraints securely dynamically ensuring math always balances via 768px hi-dpi vector baseline
       setScaleConfig(prev => ({
         ...prev,
-        scale: isMob ? Math.max((w - 32) / 768, 0.2) : 1.0
+        scale: isMob ? Math.max((w - 16) / 768, 0.2) : 1.0
       }));
     };
     
@@ -183,6 +183,7 @@ export default function SpectrumEmulator() {
       <div 
         className="player-wrapper glass-panel"
         style={{
+          flexShrink: 0,
           transform: scaleConfig.scale !== 1 ? `scale(${scaleConfig.scale})` : 'none',
           transformOrigin: 'top left'
         }}

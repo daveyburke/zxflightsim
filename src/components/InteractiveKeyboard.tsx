@@ -107,7 +107,7 @@ export default function InteractiveKeyboard() {
   return (
     <div 
       className="spectrum-image glass-panel" 
-      style={{ position: 'relative', width: '100%', cursor: 'pointer', overflow: 'hidden', touchAction: 'none' }}
+      style={{ WebkitTapHighlightColor: 'transparent', position: 'relative', width: '100%', cursor: 'pointer', overflow: 'hidden', touchAction: 'none' }}
       onPointerDown={handleTap}
     >
       <Image
