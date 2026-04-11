@@ -17,7 +17,7 @@ const ROW_ZONES = [
   { yMax: 0.285, startX: 0.0570, colWidth: 0.0900 },
   { yMax: 0.513, startX: 0.0980, colWidth: 0.0900 },
   { yMax: 0.741, startX: 0.1233, colWidth: 0.0900 },
-  { yMax: 1.000, startX: 0.0600, colWidth: 0.0900 },
+  { yMax: 1.000, startX: 0.0820, colWidth: 0.0900 }, // Shifted right natively
 ];
 
 export default function InteractiveKeyboard() {
@@ -130,7 +130,7 @@ export default function InteractiveKeyboard() {
         let cy = 0.1744;
         if (activeKey.row === 1) cy = 0.3973;
         if (activeKey.row === 2) cy = 0.6298;
-        if (activeKey.row === 3) cy = 0.8527;
+        if (activeKey.row === 3) cy = 0.8250; // Shifted UP visually
 
         return (
           <div style={{

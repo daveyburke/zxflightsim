@@ -33,19 +33,23 @@
 
 body {
   background-color: var(--bg-color);
-  background-image: 
+  background-image:
     radial-gradient(circle at 50% 50%, #2a2a2a 0%, #121212 100%),
     linear-gradient(rgba(0, 0, 0, 0.1) 50%, transparent 50%);
-  background-size: 100% 100%, 100% 4px; /* Scanline effect */
+  background-size: 100% 100%, 100% 4px;
+  /* Scanline effect */
   color: var(--text-main);
-  font-family: 'ZX Spectrum', monospace; /* The retro font */
+  font-family: 'ZX Spectrum', monospace;
+  /* The retro font */
   line-height: 1.5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: var(--text-accent);
   text-shadow: 2px 2px 0px var(--zx-blue);
   margin-bottom: 1rem;
@@ -72,80 +76,56 @@ h1, h2, h3 {
 
 @media (min-width: 1024px) {
   .layout-grid {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: min-content 1fr;
+    grid-gap: 2rem;
+    gap: 2rem;
     align-items: start;
+    justify-content: center;
   }
 }
+
 
 .emulator-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  zoom: 0.7; /* Default desktop sizing */
+  /* Natively inherits mathematically accurate physical bounds */
   transform-origin: top center;
 }
 
-/* Fluid responsive downscaling for smaller vertical phone screens */
-@media (max-width: 850px) {
-  .emulator-container {
-    zoom: 1; /* Reset desktop zoom */
-    width: 100vw;
-    margin: 0;
-    max-width: 100%;
-  }
-  .player-wrapper {
-    transform: none;
-    margin-bottom: 0;
-  }
-  .jsspeccy-crop-window {
-    width: 256px !important;
-    height: 192px !important;
-  }
-  #jsspeccy.jsspeccy-inner {
-    margin: 0 !important;
-  }
-  .spectrum-image {
-    width: 100%;
-    max-width: 100vw !important;
-  }
-}
-
 .player-wrapper {
-  padding: 6px;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background: var(--zx-white); /* Typical pale gray ZX Spectrum faceplate/border color */
+  background: black;
 }
 
 .jsspeccy-crop-window {
-  width: 768px;
-  height: 576px;
   overflow: hidden;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   position: relative;
 }
 
 #jsspeccy.jsspeccy-inner {
-  margin-top: 0;
-  margin-left: 0;
   flex-shrink: 0;
 }
 
 /* The element holding JSSpeccy */
 #jsspeccy {
-  box-shadow: 0 0 20px rgba(0,215,215, 0.4);
-  image-rendering: pixelated; /* Crisp original pixels */
+  box-shadow: 0 0 20px rgba(0, 215, 215, 0.4);
+  image-rendering: pixelated;
+  /* Crisp original pixels */
 }
 
 .spectrum-image {
   width: 100%;
   margin: 0 auto;
   border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
   display: block;
 }
 
@@ -165,7 +145,7 @@ h1, h2, h3 {
 .controls-list li {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px dashed rgba(255,255,255,0.2);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
   padding-bottom: 0px;
 }
 
@@ -197,7 +177,7 @@ h1, h2, h3 {
   height: 34px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -227,12 +207,12 @@ h1, h2, h3 {
   border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: var(--zx-green);
   box-shadow: 0 0 10px var(--zx-green);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   transform: translateX(26px);
 }
 
@@ -251,7 +231,3 @@ input:checked + .slider:before {
 .btn-permission:active {
   transform: scale(0.95);
 }
-
-
-
-
