@@ -94,11 +94,16 @@ h1, h2, h3 {
     max-width: 100%;
   }
   .player-wrapper {
-    /* Add padding room back to the scaling algebra to prevent massive edge-to-edge blow-up */
-    transform: scale(calc((100vw - 2rem) / 752));
-    transform-origin: top center;
-    margin-bottom: calc((100vw - 2rem) * (532 / 752) - 532px); 
-    border-radius: 0;
+    transform: none;
+    margin-bottom: 0;
+  }
+  .jsspeccy-crop-window {
+    width: 247px !important;
+    height: 173px !important;
+  }
+  #jsspeccy.jsspeccy-inner {
+    margin-top: -8px !important;
+    margin-left: -8px !important;
   }
   .spectrum-image {
     width: 100%;

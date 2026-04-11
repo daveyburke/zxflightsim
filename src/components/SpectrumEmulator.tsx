@@ -11,8 +11,9 @@ export default function SpectrumEmulator() {
   const initEmulator = () => {
     if (typeof window !== 'undefined' && (window as any).JSSpeccy && containerRef.current && !emuInstance.current) {
       console.log("Initializing JSSpeccy...");
+      const isMobile = window.innerWidth <= 800;
       emuInstance.current = (window as any).JSSpeccy(containerRef.current, {
-        zoom: 3,
+        zoom: isMobile ? 1 : 3,
         machine: 48,
         openUrl: '/games/FlightSimulation.tap',
         tapeTrapsEnabled: true,
