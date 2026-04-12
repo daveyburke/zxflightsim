@@ -5,12 +5,20 @@ import { useState, useEffect, useRef } from 'react';
 export default function MotionController() {
   const [enabled, setEnabled] = useState(false);
   const [needPermission, setNeedPermission] = useState(false);
+  const [inMenu, setInMenu] = useState(true);
 
   const keyStates = useRef({
     up: false,
     down: false,
     left: false,
     right: false,
+  });
+
+  const throttleCache = useRef({
+    up: 0,
+    down: 0,
+    left: 0,
+    right: 0
   });
 
   const dispatchKey = (key: string, type: string) => {
@@ -45,44 +53,52 @@ export default function MotionController() {
     document.dispatchEvent(event);
   };
 
-  const updateKey = (key: string, shouldBeDown: boolean) => {
+  const updateKey = (key: string, shouldBeDown: boolean, force = false) => {
+    // If we're blocked strictly sitting in the BASIC 1982 initialization menu,
+    // intercept all tilt signals and force them to explicitly evaluate neutrally 
+    // to strictly prevent "keyboard matrix ghosting" from erasing modern number inputs
+    if (inMenu && !force) {
+      shouldBeDown = false;
+    }
+
     const kState = keyStates.current as any;
     const internalKey = key === 'ArrowUp' ? 'up' : key === 'ArrowDown' ? 'down' : key === 'ArrowLeft' ? 'left' : 'right';
 
-    if (shouldBeDown && !kState[internalKey]) {
-      kState[internalKey] = true;
-      dispatchKey(key, 'keydown');
-    } else if (!shouldBeDown && kState[internalKey]) {
-      kState[internalKey] = false;
-      dispatchKey(key, 'keyup');
+    if (shouldBeDown !== kState[internalKey]) {
+      const now = Date.now();
+      // Enforce strict 1Hz (1000ms) transition ceiling to physically block runaway polling noise
+      if (!force && (now - (throttleCache.current as any)[internalKey] < 1000)) return;
+
+      kState[internalKey] = shouldBeDown;
+      (throttleCache.current as any)[internalKey] = now;
+      dispatchKey(key, shouldBeDown ? 'keydown' : 'keyup');
     }
   };
 
   // Generic Sensor API handler
   const handleAccelerometer = (x: number, y: number, z: number) => {
+    const k = keyStates.current as any;
     // Vertical hold roll (x-axis tracks lateral tilt)
-    updateKey('ArrowLeft', x > 3);
-    updateKey('ArrowRight', x < -3);
+    updateKey('ArrowLeft', !k.left ? x > 3.0 : x > 1.5);
+    updateKey('ArrowRight', !k.right ? x < -3.0 : x < -1.5);
 
     // Vertical hold pitch maps to Z axis!
-    // Tilt forward -> face up gravity -> z is positive. Lower threshold to 1.5 for higher sensitivity
-    updateKey('ArrowUp', z > 1.5);    // Dive
-    // Tilt backward -> face down gravity -> z is negative
-    updateKey('ArrowDown', z < -1.5); // Climb
+    updateKey('ArrowUp', !k.up ? z > 1.5 : z > 0.8);
+    updateKey('ArrowDown', !k.down ? z < -1.5 : z < -0.8);
   };
 
   // DeviceOrientation handler
   const handleOrientation = (beta: number | null, gamma: number | null) => {
     if (beta === null || gamma === null) return;
+    const k = keyStates.current as any;
+
     // For vertical portrait hold: Center is beta ~90.
-    // Tilt forward (top away, screen faces up): beta approaches 0.
-    // Tilt backward (top towards you, screen faces down): beta approaches 180.
-    updateKey('ArrowLeft', gamma < -15);
-    updateKey('ArrowRight', gamma > 15);
-    // Increased sensitivity margin: 10 degrees from neutral center
-    updateKey('ArrowUp', beta < 80);
-    // Tilting backward -> go up (climb = ArrowDown)
-    updateKey('ArrowDown', Math.abs(beta) > 100);
+    updateKey('ArrowLeft', !k.left ? gamma < -15 : gamma < -8);
+    updateKey('ArrowRight', !k.right ? gamma > 15 : gamma > 8);
+
+    // Increased sensitivity margin: ~10 degrees from neutral center natively
+    updateKey('ArrowUp', !k.up ? beta < 80 : beta < 85);
+    updateKey('ArrowDown', !k.down ? Math.abs(beta) > 100 : Math.abs(beta) > 95);
   };
 
   // Setup sensors when active
@@ -91,11 +107,11 @@ export default function MotionController() {
     let orientHandler: any = null;
 
     if (!enabled) {
-      // Release all keys
-      updateKey('ArrowUp', false);
-      updateKey('ArrowDown', false);
-      updateKey('ArrowLeft', false);
-      updateKey('ArrowRight', false);
+      // Release all keys immediately ignoring throttle limitations
+      updateKey('ArrowUp', false, true);
+      updateKey('ArrowDown', false, true);
+      updateKey('ArrowLeft', false, true);
+      updateKey('ArrowRight', false, true);
       return;
     }
 
@@ -136,7 +152,29 @@ export default function MotionController() {
       if (sensor) sensor.stop();
       if (orientHandler) window.removeEventListener('deviceorientation', orientHandler);
     };
-  }, [enabled]);
+  }, [enabled, inMenu]);
+
+  // Track the raw keystrokes globally to intuitively guess when the classic ROM boot sequence 
+  // explicitly transitions away from the Basic input menus and fully arms the core assembly 3D engine
+  useEffect(() => {
+    let menuStep = 0;
+    const tracker = (e: KeyboardEvent) => {
+      const k = e.key.toLowerCase();
+      
+      if (menuStep === 0 && ['1', '2', '3'].includes(k)) {
+        menuStep = 1;
+      } else if (menuStep === 1 && ['y', 'n'].includes(k)) {
+        setInMenu(false);
+      } else if (k === 'escape' || k === '0') {
+        // Esc / 0 mathematically restarts the emulator entirely back to its title ROM sequence
+        menuStep = 0;
+        setInMenu(true);
+      }
+    };
+    
+    window.addEventListener('keydown', tracker);
+    return () => window.removeEventListener('keydown', tracker);
+  }, []);
 
   // Check iOS permission requirements
   useEffect(() => {
@@ -165,7 +203,11 @@ export default function MotionController() {
       <div style={{ flex: 1 }}>
         <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--zx-green)' }}>Motion Controls</h3>
         <p style={{ fontSize: '0.8rem', color: 'var(--zx-white)', margin: '0.5rem 0' }}>
-          Control aircraft with phone sensors
+          {enabled && inMenu ? (
+            <span style={{ color: 'var(--zx-yellow)' }}>Armed. Awaiting takeoff...</span>
+          ) : (
+            'Control aircraft with phone sensors'
+          )}
         </p>
       </div>
 

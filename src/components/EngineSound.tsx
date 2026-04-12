@@ -51,11 +51,26 @@ export default function EngineSound() {
     document.addEventListener('touchstart', unlockAudio, { passive: true });
     document.addEventListener('click', unlockAudio, { passive: true });
 
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (audioCtxState.current && audioCtxState.current.state === 'running') {
+          audioCtxState.current.suspend().catch(console.error);
+        }
+      } else {
+        // Only resume if it actually exists; unlockAudio will handle user-gesture requirements if needed
+        if (audioCtxState.current && audioCtxState.current.state === 'suspended') {
+          audioCtxState.current.resume().catch(console.error);
+        }
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('pointerdown', unlockAudio);
       document.removeEventListener('touchstart', unlockAudio);
       document.removeEventListener('click', unlockAudio);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 
