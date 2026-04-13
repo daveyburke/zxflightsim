@@ -19,7 +19,9 @@ export default function SpectrumEmulator() {
   const initEmulator = () => {
     if (typeof window !== 'undefined' && (window as any).JSSpeccy && containerRef.current && !emuInstance.current) {
       console.log("Initializing JSSpeccy...");
-      const isMobile = window.innerWidth <= 800;
+      // Identify true hardware mobile/foldable displays organically vs just small desktop windows!
+      const isTouch = typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0;
+      const isMobile = window.innerWidth <= 800 || (isTouch && window.innerWidth < 1200);
 
       if (isMobile) {
         // Calculate the maximum clean native scale factor to fill 100vw!
@@ -30,8 +32,9 @@ export default function SpectrumEmulator() {
         const scale = (window.innerWidth - padding) / 768;
         setScaleConfig({ scale, baseHeight: 576 });
       } else {
-        // Desktop natively falls back to exact internal 1.0x engine math bounds cleanly
-        setScaleConfig({ scale: 1.0, baseHeight: 576 });
+        // Shrink the native JSSpeccy desktop footprint by precisely 15% per specific request 
+        // to gracefully accommodate smaller laptop screens without overflowing!
+        setScaleConfig({ scale: 0.85, baseHeight: 576 });
       }
 
       emuInstance.current = (window as any).JSSpeccy(containerRef.current, {
@@ -166,11 +169,12 @@ export default function SpectrumEmulator() {
   useEffect(() => {
     const handleDeviceFlip = () => {
       const w = window.innerWidth;
-      const isMob = w <= 800;
+      const isTouch = typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0;
+      const isMob = w <= 800 || (isTouch && w < 1200);
       // Re-map constraints securely dynamically ensuring math always balances via 768px hi-dpi vector baseline
       setScaleConfig(prev => ({
         ...prev,
-        scale: isMob ? Math.max((w - 16) / 768, 0.2) : 1.0
+        scale: isMob ? Math.max((w - 16) / 768, 0.2) : 0.85
       }));
     };
     

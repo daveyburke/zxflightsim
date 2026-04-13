@@ -5,7 +5,8 @@ import { useState, useEffect, useRef } from 'react';
 export default function MotionController() {
   const [enabled, setEnabled] = useState(false);
   const [needPermission, setNeedPermission] = useState(false);
-  const [inMenu, setInMenu] = useState(true);
+
+  const lastKeyboardPress = useRef(0);
 
   const keyStates = useRef({
     up: false,
@@ -36,7 +37,8 @@ export default function MotionController() {
     Object.defineProperties(event, {
       keyCode: { value: keyCode },
       which: { value: keyCode },
-      charCode: { value: 0 }
+      charCode: { value: 0 },
+      isMotionController: { value: true }
     });
 
     // Directly dispatch into the JSSpeccy DOM
@@ -54,10 +56,10 @@ export default function MotionController() {
   };
 
   const updateKey = (key: string, shouldBeDown: boolean, force = false) => {
-    // If we're blocked strictly sitting in the BASIC 1982 initialization menu,
-    // intercept all tilt signals and force them to explicitly evaluate neutrally 
-    // to strictly prevent "keyboard matrix ghosting" from erasing modern number inputs
-    if (inMenu && !force) {
+    // Elegant Mutual Exclusion: If the user hit a physical or virtual keyboard key in the last 1 second, 
+    // force motion requests to neutral natively. This absolutely eradicates matrix ghosting during menu sequences
+    // and naturally secures mid-flight keyboard interventions without locking structural simulation state.
+    if (!force && Date.now() - lastKeyboardPress.current < 1000) {
       shouldBeDown = false;
     }
 
@@ -66,8 +68,8 @@ export default function MotionController() {
 
     if (shouldBeDown !== kState[internalKey]) {
       const now = Date.now();
-      // Enforce strict 1Hz (1000ms) transition ceiling to physically block runaway polling noise
-      if (!force && (now - (throttleCache.current as any)[internalKey] < 1000)) return;
+      // Enforce strict 2Hz (500) transition ceiling to physically block runaway polling noise
+      if (!force && (now - (throttleCache.current as any)[internalKey] < 500)) return;
 
       kState[internalKey] = shouldBeDown;
       (throttleCache.current as any)[internalKey] = now;
@@ -152,28 +154,19 @@ export default function MotionController() {
       if (sensor) sensor.stop();
       if (orientHandler) window.removeEventListener('deviceorientation', orientHandler);
     };
-  }, [enabled, inMenu]);
+  }, [enabled]);
 
-  // Track the raw keystrokes globally to intuitively guess when the classic ROM boot sequence 
-  // explicitly transitions away from the Basic input menus and fully arms the core assembly 3D engine
+  // Global mutual exclusion keystroke listener natively tracks when the user physically touches the keyboard.
   useEffect(() => {
-    let menuStep = 0;
-    const tracker = (e: KeyboardEvent) => {
-      const k = e.key.toLowerCase();
-      
-      if (menuStep === 0 && ['1', '2', '3'].includes(k)) {
-        menuStep = 1;
-      } else if (menuStep === 1 && ['y', 'n'].includes(k)) {
-        setInMenu(false);
-      } else if (k === 'escape' || k === '0') {
-        // Esc / 0 mathematically restarts the emulator entirely back to its title ROM sequence
-        menuStep = 0;
-        setInMenu(true);
-      }
+    const handleKeydown = (e: any) => {
+      // Ignore perfectly simulated synthetic events organically fired by our own controller!
+      if (e.isMotionController) return;
+      lastKeyboardPress.current = Date.now();
     };
-    
-    window.addEventListener('keydown', tracker);
-    return () => window.removeEventListener('keydown', tracker);
+
+    // Bind to the capture phase to ensure we intercept it BEFORE deeply nested canvas shadow DOMs trap the event loop
+    window.addEventListener('keydown', handleKeydown, { capture: true });
+    return () => window.removeEventListener('keydown', handleKeydown, { capture: true });
   }, []);
 
   // Check iOS permission requirements
@@ -203,11 +196,7 @@ export default function MotionController() {
       <div style={{ flex: 1 }}>
         <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--zx-green)' }}>Motion Controls</h3>
         <p style={{ fontSize: '0.8rem', color: 'var(--zx-white)', margin: '0.5rem 0' }}>
-          {enabled && inMenu ? (
-            <span style={{ color: 'var(--zx-yellow)' }}>Armed. Awaiting takeoff...</span>
-          ) : (
-            'Control aircraft with phone sensors'
-          )}
+          Control aircraft with phone sensors
         </p>
       </div>
 

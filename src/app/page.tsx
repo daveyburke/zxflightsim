@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main>
       <div className="layout-grid" style={{ paddingTop: '1rem' }}>
-        <section className="emulator-container" style={{ alignItems: 'center', width: 'var(--jsspeccy-scaled-width, auto)' }}>
+        <section className="emulator-container" style={{ alignItems: 'center', width: 'var(--jsspeccy-scaled-width, auto)', margin: '0 auto' }}>
           <SpectrumEmulator />
 
           <div style={{ marginTop: '0.5rem', width: 'var(--jsspeccy-scaled-width, 100%)', alignSelf: 'center' }}>
