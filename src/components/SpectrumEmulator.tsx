@@ -83,7 +83,7 @@ export default function SpectrumEmulator() {
             if (isMobile) {
               setScaleConfig({ scale: (window.innerWidth - 16) / 768, baseHeight: finalHeight });
             } else {
-              setScaleConfig({ scale: 1.0, baseHeight: finalHeight });
+              setScaleConfig({ scale: 0.85, baseHeight: finalHeight });
             }
 
             clearInterval(t);

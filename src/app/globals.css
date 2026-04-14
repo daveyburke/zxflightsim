@@ -80,9 +80,13 @@ h3 {
     grid-template-columns: min-content 1fr;
     grid-gap: 2rem;
     gap: 2rem;
-    align-items: start;
+    align-items: stretch;
     justify-content: center;
     padding: 1rem; /* Desktop safe layout padding */
+  }
+  .controls-panel {
+    /* Narrow the right column dynamically by precisely 15% on desktop only without altering native string metrics */
+    width: 85%;
   }
 }
 
@@ -143,7 +147,7 @@ h3 {
 
 .controls-list {
   list-style-type: none;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 0;
